@@ -112,6 +112,19 @@
         // 最初のカードをセットする
         setCard();
 
+        window.addEventListener('keyup', function(e) {
+          // console.log から クリック時の キーコードを取得する
+          // e.keyCode
+          // f:
+          // n:
+          console.log(e.keyCode);
+          if (e.keyCode === 70) {
+            flip();
+          } else if (e.keyCode === 78) {
+            next();
+          } 
+        })
+
         function flip() {
           card.className = card.className === '' ? 'open' : '';
         }
