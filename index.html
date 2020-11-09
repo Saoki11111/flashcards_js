@@ -91,14 +91,26 @@
         });
 
         function next() {
+          // オープン時は答えが見れるため NEXT を 押下したら flip する処理
+          if(card.className === 'open') {
+            card.addEventListener('transitionend', setCard)
+            flip();
+          } else {
+            setCard();
+          }
+        }
+
+        function setCard() {
           // ランダムに word から 値を取る(関数を使う)
           var num = Math.floor(Math.random() * words.length);
           cardFront.innerHTML = words[num]['en'];
           cardBack.innerHTML = words[num]['ja'];
+          // event が何回も attatch するのを防ぐ
+          card.removeEventListener('transitionend', setCard);
         }
 
         // 最初のカードをセットする
-        next();
+        setCard();
 
         function flip() {
           card.className = card.className === '' ? 'open' : '';
