@@ -57,8 +57,9 @@
 </head>
 <body>
     <div id="card">
-      <div id="card-front">front</div>
-      <div id="card-back">back</div>
+      <!-- words から値をセットする -->
+      <div id="card-front"></div>
+      <div id="card-back"></div>
     </div>
 
     <div id="btn">NEXT</div>
@@ -76,9 +77,28 @@
         ]
 
         var card = document.getElementById('card');
+        var cardFront = document.getElementById('card-front');
+        var cardBack = document.getElementById('card-back');
+        var btn = document.getElementById('btn');
+
         card.addEventListener('click', function() {
           flip();
         });
+
+        // btn を押したとき次のカードに行く 
+        btn.addEventListener('click', function() {
+          next();
+        });
+
+        function next() {
+          // ランダムに word から 値を取る(関数を使う)
+          var num = Math.floor(Math.random() * words.length);
+          cardFront.innerHTML = words[num]['en'];
+          cardBack.innerHTML = words[num]['ja'];
+        }
+
+        // 最初のカードをセットする
+        next();
 
         function flip() {
           card.className = card.className === '' ? 'open' : '';
